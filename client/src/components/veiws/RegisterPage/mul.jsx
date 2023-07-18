@@ -1,8 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
+import { BrowserRouter, Link, Routes, Route } from 'react-router-dom';
+import loading from '../RegisterPage/loading';
 
 const Mul = () => {
+  <Routes>
+    <Route path="/loading" element={<loading/>}/>
+  </Routes>
   const previewImage = (event) => {
     const reader = new FileReader();
     reader.onload = function () {
@@ -15,6 +20,7 @@ const Mul = () => {
   };
 
   return (
+
     <section id="main" style={{ backgroundColor: '#008374' }}>
       <article id="article1">
         <div className="board_wrap">
@@ -38,7 +44,7 @@ const Mul = () => {
                       />
                     </dd>
                     <br />
-                    <dl style={{ paddingTop: '10px' }}>
+                    <dl style={{ paddingTop: '10px', marginBottom: 0 }}>
                       <img
                         style={{ maxWidth: '600px', maxHeight: '600px' }}
                         id="preview"
@@ -50,7 +56,7 @@ const Mul = () => {
             </div>
             <div>
               <Button variant="primary" size="lg" style={{ marginRight: '10px' }}>
-                실행하기
+              <Link to="/loading" style={{ color: 'inherit', textDecoration: 'none' }}>실행하기</Link>
               </Button>
               <Button variant="primary" size="lg">
                 <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>취소</Link>

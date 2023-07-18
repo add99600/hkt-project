@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Signup from './Signup'
+import Signup from '../RegisterPage/Signup'
 import { BrowserRouter, Link, Routes, Route } from 'react-router-dom';
-import Login from './Login'
-import Mul from './mul';
+import Login from '../../../Login'
+import Mul from '../RegisterPage/mul';
+import community from '../RegisterPage/community';
+import loading from '../RegisterPage/loading';
 
 function App() {
 
@@ -21,8 +23,11 @@ function App() {
         <Route path='/Signup' element={<Signup />} />
         <Route path='/login' element={<Login />} />
         <Route path="/mul" element={<Mul />} />
+        <Route path="/community" element={<community />} />
+        <Route path="/loading" element={<loading />} />
       </Routes>
     </BrowserRouter>
+
   );
 }
 
@@ -32,8 +37,8 @@ const Home = () => {
       <div className="container position-relative">
         <div className="row gy-5" data-aos="fade-in">
           <div className="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start">
-            <h2>환영한다 <span></span>탈모게이들아</h2>
-            <p>탈모게이들 머리 자라난 모습 보고싶노?</p>
+            <h2>환영한다 <span></span>탈모친구들</h2>
+            <p>탈모친구들 머리 자라난 모습 보고싶나?</p>
             <div className="d-flex justify-content-center justify-content-lg-start">
               <Link to="/mul" className="btn-get-started" style={{ color: 'inherit', textDecoration: 'none' }}>끝없는 탈모 레츠고</Link>
             </div>
@@ -57,7 +62,7 @@ const Home = () => {
             <div className="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
               <div className="icon-box">
                 <div className="icon"><i className="bi bi-gem"></i></div>
-                <h4 className="title"><a href="blog.html" className="stretched-link">커뮤니티</a></h4>
+                <h4 className="title"><Link to="/community">커뮤니티</Link></h4>
               </div>
             </div>
 
