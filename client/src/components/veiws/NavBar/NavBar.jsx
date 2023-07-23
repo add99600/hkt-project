@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Link } from 'react-router-dom';
 
 const NavBar = () => {
@@ -7,7 +7,7 @@ const NavBar = () => {
       <div className="container-fluid container-xl d-flex align-items-center justify-content-between">
         <Link to="/" className="logo d-flex align-items-center">
           <img src="assets/img/logo.png" alt="" />
-          <h1>모발인</h1>
+          <h1>베트남사스케</h1>
         </Link>
         <nav id="navbar" className="navbar">
           <ul>

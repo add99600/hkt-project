@@ -1,6 +1,4 @@
-import React from 'react'
 import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
 import '../assets/community.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -14,7 +12,7 @@ const Comm = () => {
               <div className="list-item" data-id="19">
                 <div><a href="#" data-abc="true"><span className="w-48 avatar gd-warning">S</span></a></div>
                 <div className="flex">
-                  <a href="#" className="item-author text-color" data-abc="true">글 제목</a>
+                  <a className="item-author text-color" data-abc="true">글 제목</a>
                   <div className="item-except text-muted text-sm h-1x">조회수나 등록 시간 등</div>
                 </div>
                 <div className="no-wrap">
@@ -66,7 +64,7 @@ const Comm = () => {
         </div>
       </div>
       <div className="create-post-button">
-          <a variant="primary"><Link to="/Comm_write"> 글 작성하기 </Link></a>
+          <a><Link to="/Comm_write"> 글 작성하기 </Link></a> {/* variant="primary" */}
       </div>
     </div>
   )
