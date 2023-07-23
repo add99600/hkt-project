@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter, Link, Routes, Route } from 'react-router-dom';
 import Mul from '../RegisterPage/mul.jsx';
@@ -9,8 +8,8 @@ import CommWrite from '../RegisterPage/comm_write.jsx';
 import NavBar from '../NavBar/NavBar.jsx';
 import Footer from '../Footer/Footer.jsx';
 import Load from '../RegisterPage/load.jsx';
+import Result from '../RegisterPage/result.jsx';
 import Infor from '../RegisterPage/infor.jsx';
-import MainLayout from './MainLayout.jsx';
 
 
 function App() {
@@ -25,6 +24,7 @@ function App() {
         <Route path="/Comm" element={<Comm />} />
         <Route path="/Comm_write" element={<CommWrite />} />
         <Route path="/Load" element={<Load />} />
+        <Route path="/Result" element={<Result />} />
         <Route path="/Infor" element={<Infor />} />
       </Routes>
     </BrowserRouter>

@@ -1,7 +1,8 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios'
 
+var email;
+var password;
 
 const handleSubmit = (e) => {
          e.preventDefault()

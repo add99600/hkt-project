@@ -1,20 +1,18 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/veiws/LandingPage/App.jsx';
 import { Provider } from 'react-redux';
-import { applyMiddleware, createStore, compose } from 'redux';
+import { applyMiddleware, createStore } from 'redux'; 
 import promiseMiddleware from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
 import rootReducer from './_reducers/user_reducer.jsx';
+import Reducer from './_reducers/inde.js';
 
+const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore);
 
-// Spread('...')를 사용하여 미들웨어 배열을 applyMiddleware 함수에 전달
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(
-  rootReducer,
-  { ...composeEnhancers(applyMiddleware(promiseMiddleware, ReduxThunk)) }
-);
+// Redux 스토어 생성
+const store = createStoreWithMiddleware(rootReducer);
 
+// 앱을 Redux Provider로 감싸기
 ReactDOM.render(
   <Provider store={store}>
     <App />

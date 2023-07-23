@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import '../assets/comm_write.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Button from 'react-bootstrap/Button';
@@ -19,7 +19,18 @@ const CommWrite = () => {
   };
 
   const handleSend = () => {
-    // 이미지와 제목, 내용을 사용하여 후기를 전송하는 로직 추가
+    const titleInput = document.getElementById('title');
+    const contentInput = document.getElementById('content');
+  
+    if (!titleInput.value.trim() || !contentInput.value.trim()) { // 공백여부 확인
+      alert('제목과 내용을 입력해주세요');
+      return;
+    }
+  
+    if (images.length < 2) { // 사진이 두개 이상 있는지 확인
+      alert('사진을 두 개 이상 입력해주세요');
+      return;
+    }
   };
 
   return (
@@ -43,7 +54,7 @@ const CommWrite = () => {
                   </div>
                   <div className="info">
                     <dl>
-                      <dt>사진 선택</dt>
+                      <dt>컨트롤키와 마우스를 동시에 클릭하여 사진을 여러개 선택할 수 있습니다.</dt>
                       <dd>
                         <input
                           className="form-control"
@@ -68,7 +79,6 @@ const CommWrite = () => {
                     </dl>
                   </div>
                   <div className="cont">
-                    {/* Increase the rows attribute to change the size of the textarea */}
                     <textarea placeholder="내용 입력" id="content" rows={8} style={{ fontSize: '1.4rem', width: '100%' }}></textarea>
                   </div>
                 </div>
