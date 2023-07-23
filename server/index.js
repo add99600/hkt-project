@@ -109,7 +109,7 @@ app.post("/api/community/posts", auth, async (req, res) => {
       post: newPost,
     });
   } catch (err) {
-    console.error(err); // 에러를 콘솔에 출력하여 확인합니다.
+    console.error(err); // 에러를 콘솔에 출력하여 확인
     return res.status(500).json({
       success: false,
       message: "글 작성에 실패했습니다.",
@@ -123,7 +123,9 @@ app.post("/api/community/posts", auth, async (req, res) => {
 app.get("/api/community/posts", async (req, res) => {
   try {
     // 모든 커뮤니티 포스트 조회하되, content 필드를 선택하지 않음
-    const posts = await CommunityPost.find({}, 'title author createdAt updatedAt');
+    const posts = await CommunityPost.find({}, 'title author comments createdAt updatedAt')
+      .populate("author")
+      .populate("comments.author");
 
     return res.status(200).json({
       success: true,
@@ -191,6 +193,51 @@ app.get("/api/community/posts/:postId", auth, async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "포스트 조회에 실패했습니다.",
+      error: err.message,
+    });
+  }
+});
+
+// 댓글 추가 API 라우트
+app.post("/api/community/posts/:postId/comments", auth, async (req, res) => {
+  try {
+    const postId = req.params.postId;
+    const { text } = req.body;
+
+    const post = await CommunityPost.findById(postId);
+
+    if (!post) {
+      return res.status(404).json({
+        success: false,
+        message: "해당 포스트를 찾을 수 없습니다.",
+      });
+    }
+
+    // 로그인된 사용자만 댓글을 추가할 수 있도록 검증
+    if (!req.user) {
+      return res.status(401).json({
+        success: false,
+        message: "댓글을 추가하려면 로그인이 필요합니다.",
+      });
+    }
+
+    // 댓글 추가
+    post.comments.push({
+      text,
+      author: req.user._id,
+    });
+
+    await post.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "댓글이 성공적으로 추가되었습니다.",
+    });
+  } catch (err) {
+    // 에러 처리
+    return res.status(500).json({
+      success: false,
+      message: "댓글 추가에 실패했습니다.",
       error: err.message,
     });
   }
@@ -264,7 +311,6 @@ app.delete("/api/community/posts/:postId", auth, async (req, res) => {
 });
 
 /////////////////////////////////////////////커뮤니티 CRUD/////////////////////////////////////////
-
 
 app.listen(port, () =>
   console.log(`Example app listening at http://localhost:${port}`)
