@@ -1,10 +1,23 @@
-import { useState } from 'react';
+import { useState} from 'react';
+import axios from 'axios';
 import '../assets/comm_write.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Button from 'react-bootstrap/Button';
 
 const CommWrite = () => {
+
   const [images, setImages] = useState([]); // 이미지들을 저장할 상태 배열
+  const [Title, setTitle] = useState('');
+  const [Content, setContent] = useState('');
+
+  const onTitleHandler = (event) => {
+    setTitle(event.target.value);
+  };
+
+  const onContentHandler = (event) => {
+    setContent(event.target.value);
+  };
+
 
   const previewImages = (event) => {
     const files = event.target.files;
@@ -18,7 +31,10 @@ const CommWrite = () => {
     setImages(imagePreviews); // 이미지 배열 상태 업데이트
   };
 
-  const handleSend = () => {
+
+  const handleSend = (event) => {
+    event.preventDefault();
+
     const titleInput = document.getElementById('title');
     const contentInput = document.getElementById('content');
   
@@ -27,10 +43,31 @@ const CommWrite = () => {
       return;
     }
   
-    if (images.length < 2) { // 사진이 두개 이상 있는지 확인
-      alert('사진을 두 개 이상 입력해주세요');
-      return;
-    }
+    // 사진이 두개 이상 있는지 확인
+    //if (images.length < 2) {
+      //alert('사진을 두 개 이상 입력해주세요');
+      //return;
+    //}
+
+    // 쿠키에서 토큰을 가져오기
+
+    let body = {
+      title: Title,
+      content: Content
+    };
+
+    axios.post('http://localhost:5000/api/community/posts', body, {withCredentials: true})
+    .then((response) => {
+        console.log(response.data); 
+        if (response.data.success) {
+            console.log('글 등록 성공!');
+        } else {
+            alert('글 등록에 실패했습니다.');
+        }
+    })
+    .catch((error) => {
+        console.error('서버 요청 실패:', error);
+    });
   };
 
   return (
@@ -42,13 +79,19 @@ const CommWrite = () => {
               <div className="board_title">
                 <p>사진을 등록해 후기를 남겨주세요.</p>
               </div>
-              <div className="board_write_wrap">
+              <form className="board_write_wrap" onSubmit={handleSend}>
                 <div className="board_write">
                   <div className="title">
                     <dl>
                       <dt>제목</dt>
                       <dd>
-                        <input type="text" placeholder="제목 입력" id="title" rows={8} style={{ fontSize: '1.4rem', width: '100%' }} />
+                        <input 
+                        value={Title}
+                        onChange={onTitleHandler}
+                        type="title" 
+                        placeholder="제목 입력" 
+                        id="title" 
+                        rows={8} style={{ fontSize: '1.4rem', width: '100%' }} />
                       </dd>
                     </dl>
                   </div>
@@ -79,18 +122,24 @@ const CommWrite = () => {
                     </dl>
                   </div>
                   <div className="cont">
-                    <textarea placeholder="내용 입력" id="content" rows={8} style={{ fontSize: '1.4rem', width: '100%' }}></textarea>
+                    <textarea 
+                      value={Content}
+                      onChange={onContentHandler}
+                      placeholder="내용 입력" 
+                      id="content" 
+                      rows={8} style={{ fontSize: '1.4rem', width: '100%' }}>
+                    </textarea>
                   </div>
                 </div>
                 <div className="bt_wrap">
-                <Button variant="primary" style={{ width: '100px', height: '40px', margin: '5px', fontSize: '1.2rem' }} onClick={handleSend}>
+                <Button type="submit" variant="primary" style={{ width: '100px', height: '40px', margin: '5px', fontSize: '1.2rem' }}>
                   작성
                 </Button>
                 <Button variant="danger" style={{ width: '100px', height: '40px', margin: '5px', fontSize: '1.2rem' }}>
                   취소
                 </Button>
                 </div>
-              </div>
+              </form>
             </div>
           </article>
         </section>

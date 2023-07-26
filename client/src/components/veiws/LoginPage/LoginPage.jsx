@@ -1,10 +1,25 @@
 import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useDispatch } from 'react-redux';
-import { loginUser } from '../../../_actions/user_actions'; // Uncomment this line to import loginUser
+//import { loginUser } from '../../../_actions/user_actions';
+import axios from 'axios';
+import { useEffect } from 'react';
+import Cookies from 'js-cookie';
 
 const LoginPage = () => {
-  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // 쿠키에서 토큰을 가져오기
+    const token = Cookies.get('x_auth');
+
+    // 토큰이 존재하면 콘솔에 출력
+    if (token) {
+      console.log('토큰:', token);
+    } else {
+      console.log('쿠키에 토큰이 없습니다.');
+    }
+  }, []);
+  ////
+
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
 
@@ -18,14 +33,30 @@ const LoginPage = () => {
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-
-    let body = {
+  
+    const body = {
       email: Email,
       password: Password,
     };
+  
+    axios.post('http://localhost:5000/api/users/login', body, { withCredentials: true })
+      .then((response) => {
+        if (response.data.loginSuccess) {
+          console.log('로그인 성공!');
+          console.log('사용자 ID:', response.data.userId);
+          const token = response.data.token;
+          console.log('서버로부터 받은 토큰:', token);
 
-    // Dispatch loginUser here
-    dispatch(loginUser(body));
+        } else {
+          alert('로그인에 실패했습니다.');
+        }
+      })
+      .catch((error) => {
+        console.error('서버 요청 실패:', error);
+
+        // 요청 실패 시 에러 처리
+        alert('서버 요청에 실패했습니다. 다시 시도해주세요.');
+      });
   };
 
   return (

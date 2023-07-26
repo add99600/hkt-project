@@ -1,29 +1,70 @@
 import { Link } from "react-router-dom";
-import axios from 'axios'
-
-var email;
-var password;
-
-const handleSubmit = (e) => {
-         e.preventDefault()
-         axios.post('',{name, email, password})
-         .then(result => console.log(result))
-         .catch(err => console.log(err))
-}
-
+import axios from 'axios';
+import { useState } from 'react';
 
 function Signup() {
+
+    const [Email, setEmail] = useState('');
+    const [Password, setPassword] = useState('');
+    const [Name, setName] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+
+    const onEmailHandler = (event) => {
+        setEmail(event.currentTarget.value);
+    };
+
+    const onNameHandler = (event) => {
+        setName(event.currentTarget.value);
+    };
+
+    const onPasswordHandler = (event) => {
+        setPassword(event.currentTarget.value);
+    };
+
+    const onConfirmPasswordHandler = (event) => {
+        setConfirmPassword(event.currentTarget.value);
+    };
+
+    const onSubmitHandler = (event) => {
+        event.preventDefault();
+
+        if(Password !== confirmPassword){
+          return alert('비밀번호가 일치하지 않습니다.')
+        }
+
+        let body = {
+            email: Email,
+            password: Password,
+            name: Name
+        };
+
+        axios.post('http://localhost:5000/api/users/register', body)
+            .then((response) => {
+                console.log(response.data); 
+                if (response.data.success) {
+                    console.log('회원가입 성공!');
+                } else {
+                    alert('회원가입에 실패했습니다.');
+                }
+            })
+            .catch((error) => {
+                console.error('서버 요청 실패:', error);
+            });
+    };
+
     return (
         <div className="d-flex justify-content-center align-items-center" style={{ backgroundColor: '#008374', height: '100vh' }}>
             <div className="bg-white p-3 rounded w-25">
                 <h2>회원가입</h2>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={onSubmitHandler}>
                 <div className="mb-3">
                     <label htmlFor="email">
                         <strong>이름</strong>
                     </label>
                     <input
                         type="text"
+                        value={Name}
+                        onChange={onNameHandler}
                         placeholder="이름을 입력 해주세요"
                         autoComplete="off"
                         name="email"
@@ -37,6 +78,8 @@ function Signup() {
                     </label>
                     <input
                         type="email"
+                        value={Email}
+                        onChange={onEmailHandler}
                         placeholder="이메일을 입력 해주세요"
                         autoComplete="off"
                         name="email"
@@ -50,7 +93,23 @@ function Signup() {
                     </label>
                     <input
                         type="password"
+                        value={Password}
+                        onChange={onPasswordHandler}
                         placeholder="비밀번호를 입력 해주세요"
+                        name="password"
+                        className="form-control rounded-0"
+                        // onChange={(e) => setPassword(e.target.value)}
+                    />
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="email">
+                        <strong>비밀번호 확인</strong>
+                    </label>
+                    <input
+                        type="password"
+                        value={confirmPassword}
+                        onChange={onConfirmPasswordHandler}
+                        placeholder="비밀번호를 다시 입력 해주세요"
                         name="password"
                         className="form-control rounded-0"
                         // onChange={(e) => setPassword(e.target.value)}
