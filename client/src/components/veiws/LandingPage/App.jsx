@@ -10,7 +10,8 @@ import Footer from '../Footer/Footer.jsx';
 import Load from '../RegisterPage/load.jsx';
 import Result from '../RegisterPage/result.jsx';
 import Infor from '../RegisterPage/infor.jsx';
-
+import LandingPage from './LandingPage.jsx';
+import CommView from '../RegisterPage/comm_view.jsx';
 
 function App() {
   return (
@@ -26,8 +27,11 @@ function App() {
         <Route path="/Load" element={<Load />} />
         <Route path="/Result" element={<Result />} />
         <Route path="/Infor" element={<Infor />} />
+        <Route path="/LandingPage" element={<LandingPage />} />
+        <Route path="/CommView/:id" element={<CommView />} />
       </Routes>
     </BrowserRouter>
+
   );
 }
 

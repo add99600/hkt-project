@@ -8,6 +8,10 @@ const { auth } = require("./middleware/auth");
 const { User } = require("./models/User");
 const { CommunityPost } = require("./models/CommunityPost");
 const multer = require("multer");
+const cors = require('cors')
+
+
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 
 //application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -18,14 +22,16 @@ app.use(cookieParser());
 
 const mongoose = require("mongoose");
 mongoose
-  .connect(config.mongoURI, {
+  .connect(config.mongoURI,{
     useNewUrlParser: true,
     useCreateIndex: true,
+    useUnifiedTopology: true
   })
   .then(() => console.log("MongoDB Connected..."))
   .catch((err) => console.log(err));
 
 app.get("/", (req, res) => res.send("Hello World! Hi"));
+
 
 app.post("/api/users/register", (req, res) => {
   //Put into db from client
@@ -62,7 +68,7 @@ app.post("/api/users/login", (req, res) => {
           .status(200)
           .json({ loginSuccess: true, userId: user._id });
       });
-    });
+    });''
   });
 });
 
