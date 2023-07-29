@@ -97,28 +97,55 @@ app.get("/api/users/logout", auth, (req, res) => {
 
 /////////////////////////////////////////////커뮤니티 CRUD/////////////////////////////////////////
 
+  //fileFilter: function (req, file, callback) { // 파일 형식 걸러냄
+  //  var ext = path.extname(file.originalname);
+  //  if(ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg') {
+  //      return callback(new Error('PNG, JPG만 업로드하세요'))
+  //  }
+  //  callback(null, true)
+  //},
+  //limits:{ // 파일 사이즈 제한
+  //  fileSize: 1024 * 1024 
+  //}
+
+  // 이미지 저장 위치
+  var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './public/image');
+    },
+    filename: function (req, file, cb) {
+      cb(null, `${Date.now()}_${file.originalname}`);
+    },
+  });
+
+  var upload = multer({ storage: storage });
+
 // 커뮤니티 포스트 CRUD 라우터
 // 글 작성
-app.post("/api/community/posts", auth, async (req, res) => {
+app.post('/api/community/posts', auth, upload.array('profile'), async (req, res) => {
   try {
     const { title, content } = req.body;
+    const imagePaths = req.files.map((file) => file.path);
+    
+    // 글 작성
     const newPost = new CommunityPost({
       title,
       content,
       author: req.user._id,
+      images: imagePaths, // 이미지 파일 경로 저장
     });
-
     await newPost.save();
 
     return res.status(200).json({
       success: true,
+      message: '게시물이 성공적으로 등록되었습니다.',
       post: newPost,
     });
   } catch (err) {
     console.error(err); // 에러를 콘솔에 출력하여 확인
     return res.status(500).json({
       success: false,
-      message: "글 작성에 실패했습니다.",
+      message: '글 작성에 실패했습니다.',
       error: err.message,
     });
   }
@@ -129,7 +156,7 @@ app.post("/api/community/posts", auth, async (req, res) => {
 app.get("/api/community/posts", async (req, res) => {
   try {
     // 모든 커뮤니티 포스트 조회하되, content 필드를 선택하지 않음
-    const posts = await CommunityPost.find({}, 'title author comments createdAt updatedAt')
+    const posts = await CommunityPost.find({}, 'title author comments createdAt updatedAt images')
       .populate("author")
       .populate("comments.author");
 

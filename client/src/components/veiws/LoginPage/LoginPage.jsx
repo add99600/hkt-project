@@ -46,6 +46,11 @@ const LoginPage = () => {
           console.log('사용자 ID:', response.data.userId);
           const token = response.data.token;
           console.log('서버로부터 받은 토큰:', token);
+      
+          window.location.reload(); // 로그인 성공 시 페이지 새로고침
+          alert('환영합니다!');
+
+          window.location.href = '/';
 
         } else {
           alert('로그인에 실패했습니다.');

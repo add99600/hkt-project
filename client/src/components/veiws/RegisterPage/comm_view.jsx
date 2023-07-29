@@ -31,8 +31,6 @@ const CommView = () => {
     return <div>Loading...</div>; // 데이터 로딩 중이면 로딩 메시지를 표시
   }
 
-
-
   const imageStyle = {
     objectFit: 'cover',
     pointerEvents: 'none',
@@ -51,7 +49,7 @@ const CommView = () => {
             <article id="article1">
               <div className="board_wrap">
                 <div className="board_title">
-                  <strong>커뮤니티</strong>
+                  <strong>{post.title}</strong>
                   <p></p>
                 </div>
                 <div className="board_view_wrap">

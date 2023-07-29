@@ -29,7 +29,11 @@ const Comm = () => {
             <div className="list list-row block">
               {posts.map(post => (
                 <div key={post._id} className="list-item" data-id={post._id}>
-                  <div><a data-abc="true"><span className="w-48 avatar gd-warning">S</span></a></div>
+                    {post.images && post.images.length > 0 && (
+                    <div>
+                      <img src={post.images[0]} className="w-48 avatar gd-warning" />
+                    </div>
+                    )}
                   <div className="flex">
                     <Link to={`/CommView/${post._id}`} className="item-author text-color" data-abc="true">{post.title}</Link>
                     <div className="item-except text-muted text-sm h-1x">
