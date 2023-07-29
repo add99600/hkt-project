@@ -3,6 +3,7 @@ import '../assets/comm_board.css';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const CommView = () => {
 
@@ -14,18 +15,19 @@ const CommView = () => {
     axios({
       method: 'GET',
       url: `http://localhost:5000/api/community/posts/${id}`,
-      withCredentials: true
+      withCredentials: true,
     })
       .then(response => {
-        console.log(response.data); // 불러온 데이터 확인
+        console.log(response.data);
         setPost(response.data.post);
+        setLoading(false); // 데이터 가져오기 완료 후 loading 상태를 false로 설정
       })
       .catch(error => {
         console.error('서버 요청 실패:', error);
         alert('불러오기에 실패했습니다.');
-        setLoading(false);
+        setLoading(false); // 데이터 가져오기 실패 시에도 loading 상태를 false로 설정
       });
-  }, [id]); 
+  }, [id]);
 
   if (loading) {
     return <div>Loading...</div>; // 데이터 로딩 중이면 로딩 메시지를 표시
@@ -73,10 +75,16 @@ const CommView = () => {
                         <dd>67</dd>
                       </dl>
                     </div>
-                    <img
-                      className="detail-pic"
-                      style={imageStyle}
-                    />
+                    {post.images && post.images.length > 0 ? (
+                      <img
+                        className="detail-pic"
+                        style={imageStyle}
+                        src={post.images[0]}
+                        alt="Post Image"
+                      />
+                    ) : (
+                      <div>이미지가 없습니다</div>
+                    )}
                     <div className="content" style={{ fontSize: '1.6rem', lineHeight: '140%', padding: '10px' }}>{post.content}</div>
                   </div>
                   <div>
@@ -105,8 +113,12 @@ const CommView = () => {
                     </div>
                   </div>
                   <div className="bt_wrap">
-                    <button onClick={() => { /* add your logic here */ }} type="button" className="btn btn-dark" style={{ width: '60px', height: '40px', margin: '5px', fontSize: '1.4rem' }}>목록</button>
-                    <button onClick={() => { /* add your logic here */ }} type="button" className="btn btn-primary" id="ed" style={{ width: '60px', height: '40px', margin: '5px', fontSize: '1.4rem' }}>수정</button>
+                  <Link to="/Comm">
+                    <button type="button" className="btn btn-dark" style={{ width: '60px', height: '40px', margin: '5px', fontSize: '1.4rem' }}>
+                      목록
+                    </button>
+                  </Link>
+                    <button type="button" className="btn btn-primary" id="ed" style={{ width: '60px', height: '40px', margin: '5px', fontSize: '1.4rem' }}>수정</button>
                   </div>
                 </div>
               </div>
