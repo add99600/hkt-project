@@ -16,6 +16,8 @@ app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 //application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use('/image',express.static('image'))
+
 //application/jason
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -111,7 +113,7 @@ app.get("/api/users/logout", auth, (req, res) => {
   // 이미지 저장 위치
   var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, './public/image');
+      cb(null, 'image/');
     },
     filename: function (req, file, cb) {
       cb(null, `${Date.now()}_${file.originalname}`);
@@ -156,7 +158,7 @@ app.post('/api/community/posts', auth, upload.array('profile'), async (req, res)
 app.get("/api/community/posts", async (req, res) => {
   try {
     // 모든 커뮤니티 포스트 조회하되, content 필드를 선택하지 않음
-    const posts = await CommunityPost.find({}, 'title author comments createdAt updatedAt images')
+    const posts = await CommunityPost.find({}, 'title content author comments createdAt updatedAt images')
       .populate("author")
       .populate("comments.author");
 
@@ -199,7 +201,7 @@ app.get("/api/community/user/:userId/posts", async (req, res) => {
 app.get("/api/community/posts/:postId", auth, async (req, res) => {
   try {
     const postId = req.params.postId;
-    const post = await CommunityPost.findById(postId, 'title content author createdAt updatedAt');
+    const post = await CommunityPost.findById(postId, 'title content author createdAt updatedAt images')
 
     if (!post) {
       return res.status(404).json({

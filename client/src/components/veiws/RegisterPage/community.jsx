@@ -31,13 +31,13 @@ const Comm = () => {
                 <div key={post._id} className="list-item" data-id={post._id}>
                     {post.images && post.images.length > 0 && (
                     <div>
-                      <img src={post.images[0]} className="w-48 avatar gd-warning" />
+                      <img src={'http://localhost:3000/'+post.images[0]} className="w-48 avatar gd-warning" />
                     </div>
                     )}
                   <div className="flex">
                     <Link to={`/CommView/${post._id}`} className="item-author text-color" data-abc="true">{post.title}</Link>
                     <div className="item-except text-muted text-sm h-1x">
-                    content~~
+                      {post.content}
                     </div>
                   </div>
                   <div className="no-wrap">
