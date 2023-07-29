@@ -4,17 +4,18 @@ import Cookies from 'js-cookie';
 
 const NavBar = () => {
 
+  const token = Cookies.get('x_auth');
+
   const onClickhandler = () => {
-    axios.get('http://localhost:5000/api/users/logout', {
-      headers: {
-        Authorization: 'Bearer ' + Cookies.get('x_auth'), // 저장된 토큰을 헤더에 추가
-      },
-    })
+    axios.get('http://localhost:5000/api/users/logout', {withCredentials: true})
     .then(response => {
       if (response.data.success) {
         console.log('로그아웃 성공!');
         Cookies.remove('x_auth'); // 쿠키에서 토큰 삭제
-        // 로그아웃 후 리다이렉트 등의 작업을 수행하면 됨
+        window.location.reload(); // 로그인 성공 시 페이지 새로고침
+
+        alert('로그아웃');
+      
       } else {
         alert('로그아웃에 실패했습니다.');
       }
@@ -35,12 +36,16 @@ const NavBar = () => {
           <ul>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/Comm">커뮤니티</Link></li>
-            <li><Link to="/Signup">회원가입</Link></li>
-            <li><Link to="/login">로그인</Link></li>
-            <button onClick={onClickhandler}>로그아웃</button>
+            {token ? (
+              <li onClick={onClickhandler} className="logout-link">로그아웃</li>
+            ) : (
+              <>
+                <li><Link to="/Signup">회원가입</Link></li>
+                <li><Link to="/login">로그인</Link></li>
+              </>
+            )}
           </ul>
         </nav>
-
         <i className="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
         <i className="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
       </div>
