@@ -42,7 +42,7 @@ const Home = () => {
         <div className="row gy-5" data-aos="fade-in">
           <div className="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start">
             <h2>환영한다 <span></span>탈모친구들</h2>
-            <p>탈모친구들 머리 자라난 모습 보고싶나?</p>
+            <p>탈모친구들 머리 자라난 모습 보고싶나</p>
             <div className="d-flex justify-content-center justify-content-lg-start">
             <Link to="/mul" className="btn-get-started" style={{ color: 'white', textDecoration: 'none' }}>끝없는 탈모 레츠고</Link>
           </div>
