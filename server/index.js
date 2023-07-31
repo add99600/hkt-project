@@ -99,6 +99,7 @@ app.get("/api/users/logout", auth, (req, res) => {
 
 /////////////////////////////////////////////커뮤니티 CRUD/////////////////////////////////////////
 
+
   //fileFilter: function (req, file, callback) { // 파일 형식 걸러냄
   //  var ext = path.extname(file.originalname);
   //  if(ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg') {
@@ -113,7 +114,7 @@ app.get("/api/users/logout", auth, (req, res) => {
   // 이미지 저장 위치
   var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, 'image/');
+      cb(null, '../public/image');
     },
     filename: function (req, file, cb) {
       cb(null, `${Date.now()}_${file.originalname}`);
@@ -135,6 +136,7 @@ app.post('/api/community/posts', auth, upload.array('profile'), async (req, res)
       content,
       author: req.user._id,
       images: imagePaths, // 이미지 파일 경로 저장
+      name: req.user.name
     });
     await newPost.save();
 
@@ -201,7 +203,7 @@ app.get("/api/community/user/:userId/posts", async (req, res) => {
 app.get("/api/community/posts/:postId", auth, async (req, res) => {
   try {
     const postId = req.params.postId;
-    const post = await CommunityPost.findById(postId, 'title content author createdAt updatedAt images')
+    const post = await CommunityPost.findById(postId, 'title content author createdAt updatedAt images name')
 
     if (!post) {
       return res.status(404).json({

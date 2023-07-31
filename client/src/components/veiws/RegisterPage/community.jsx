@@ -7,19 +7,25 @@ import { useState, useEffect } from 'react';
 const Comm = () => {
   const [posts, setPosts] = useState([]);
 
+  const pageSize = 5; // 한 페이지 게시물 수
+
   useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  const fetchPosts = () => {
     axios({
       method: 'GET',
       url: 'http://localhost:5000/api/community/posts'
     }).then(response => {
       console.log(response.data); // 불러온 데이터 확인
-      setPosts(response.data.posts);
+      const reversedPosts = response.data.posts.reverse(); // 서버로부터 받아온 게시물을 역순으로 저장
+      setPosts(reversedPosts.slice(0, pageSize)); // 마지막에 작성된 5개의 게시물만 보여줌
     }).catch(error => {
       console.error('서버 요청 실패:', error);
       alert('불러오기에 실패했습니다.');
     });
-  }, []);
-
+  };
 
   return (
     <div className="page-content page-container" id="page-content">
@@ -40,9 +46,6 @@ const Comm = () => {
                       {post.content}
                     </div>
                   </div>
-                  <div className="no-wrap">
-                    <div className="item-date text-muted text-sm d-none d-md-block">{new Date(post.createdAt).toLocaleDateString()}</div>
-                  </div>
                 </div>
               ))}
             </div>
@@ -50,7 +53,7 @@ const Comm = () => {
         </div>
       </div>
       <div className="create-post-button">
-        <Link to="/Comm_write">글 작성하기</Link>
+        <Link to="/Comm_write" style={{ color: '#fff', backgroundColor: 'green', padding: '10px 20px', borderRadius: '5px', textDecoration: 'none' }}>글 작성하기</Link>
       </div>
     </div>
   )
