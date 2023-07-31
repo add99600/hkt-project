@@ -39,8 +39,8 @@ const Mul = () => {
           <p style={{ color: '#fff', fontSize: '1.2rem' }}>본인의 사진을 넣어주세요.</p>
         </div>
         <div className="board_write_wrap">
-          <div className="board_write">
-            <div className="info">
+          <div>
+            <div>
               <dl>
                 <form>
                   <dt style={{ color: '#fff', fontSize: '1.4rem' }}>사진 선택</dt>
