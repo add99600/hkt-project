@@ -1,5 +1,3 @@
-html{font-size: 10px; font-family: 돋움,arial;}
-
 ul, li {list-style: none;}
 
 a {
@@ -28,7 +26,7 @@ a {
 }
 
 .bt_wrap {
-    margin-top: 20px;
+    margin-top: 0;
     text-align: center;
     font-size: 0;
 }
@@ -39,7 +37,6 @@ a {
     min-width: 80px;
     margin-left: 10px;
     padding: 10px;
-    border: 1px solid #000;
     border-radius: 2px;
     font-size: 1.4rem;
 }
