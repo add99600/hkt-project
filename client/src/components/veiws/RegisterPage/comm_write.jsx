@@ -61,29 +61,31 @@ const CommWrite = () => {
                 <div className="board_write">
                   <div className="title">
                     <dl>
-                      <dt>제목</dt>
+                      <dt> 제목</dt>
                       <dd>
                         <input 
-                        value={Title}
-                        onChange={onTitleHandler}
-                        type="title" 
-                        placeholder="제목 입력" 
-                        id="title" 
-                        rows={8} style={{ fontSize: '1.4rem', width: '100%' }} />
+                          value={Title}
+                          onChange={onTitleHandler}
+                          type="title" 
+                          placeholder="제목 입력" 
+                          id="title" 
+                          rows={8} style={{ fontSize: '1.4rem', width: '100%' }} />
                       </dd>
                     </dl>
                   </div>
                   <div className="info">
                     <dl>
-                      <dt>컨트롤키와 마우스를 동시에 클릭하여 사진을 여러개 선택할 수 있습니다.</dt>
+                      <dt></dt>
                       <dd>
+                        <label htmlFor="image" className="image-label">
+                          사진을 선택해 주세요
+                        </label>
                         <input
                           name="profile"
                           className="form-control"
                           style={{ fontSize: '1.4rem' }}
                           type="file"
                           id="image"
-                          //multiple // 다중 파일 선택 가능하도록 설정
                           onChange={onImageChangeHandler}
                         />
                       </dd>
