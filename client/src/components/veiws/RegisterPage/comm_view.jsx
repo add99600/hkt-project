@@ -34,7 +34,7 @@ const CommView = () => {
   }
 
   const handleDelete = () => {
-    axios.delete(`http://localhost:5000/api/community/posts/${id}`, { withCredentials: true })
+    axios.delete(`../api/community/posts/${id}`, { withCredentials: true })
       .then(response => {
         console.log(response.data);
 
@@ -77,7 +77,7 @@ const CommView = () => {
             <article id="article1">
               <div className="board_wrap">
                 <div className="board_title">
-                  <strong>{post.title}</strong>
+                  <strong>커뮤니티</strong>
                   <p></p>
                 </div>
                 <div className="board_view_wrap">
@@ -97,7 +97,7 @@ const CommView = () => {
                       <img
                         className="detail-pic"
                         style={imageStyle}
-                        src={post.images[0]}
+                        src={'http://localhost:5000/'+post.images[0]}
                         alt="Post Image"
                       />
                     ) : (

@@ -7,7 +7,7 @@ const NavBar = () => {
   const token = Cookies.get('x_auth');
 
   const onClickhandler = () => {
-    axios.get('http://localhost:5000/api/users/logout', { withCredentials: true })
+    axios.get('../api/users/logout', { withCredentials: true })
       .then(response => {
         if (response.data.success) {
           console.log('로그아웃 성공!');

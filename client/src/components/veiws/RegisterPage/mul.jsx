@@ -1,13 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { Link, useNavigate } from 'react-router-dom';
-import ProgressBar from 'react-bootstrap/ProgressBar';
 
 const Mul = () => {
   const [imageFile, setImageFile] = useState(null);
-  const [loadingProgress, setLoadingProgress] = useState(0);
-  const [showLoad, setShowLoad] = useState(false);
-  const navigate = useNavigate();
+  const [showLoad, setShowLoad] = useState(false); // 추가한 state 변수
 
   const previewImage = (event) => {
     const file = event.target.files[0];
@@ -16,16 +13,27 @@ const Mul = () => {
     }
   };
 
-  useEffect(() => {
-    if (loadingProgress === 100) {
-      navigate('/Result');
-    }
-  }, [loadingProgress, navigate]);
-
   const handleExecute = () => {
     if (imageFile) {
-      setShowLoad(true);
-      setLoadingProgress(100); //progressbar 현재 숫자
+      setShowLoad(true); // setShowLoad 사용
+
+      const formData = new FormData();
+      formData.append('image', imageFile);
+
+      fetch('/help', {
+        method: 'POST',
+        body: formData,
+        withCredentials: true
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          document.getElementById("ItemPreview").src = 'data:image/png;base64,' + data;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
     } else {
       alert('사진을 입력해주세요');
     }
@@ -58,14 +66,9 @@ const Mul = () => {
                     {imageFile ? (
                       <img
                         style={{ maxWidth: '600px', maxHeight: '600px' }}
-                        id="preview"
+                        id="ItemPreview"
                       />
                     ) : null}
-                    {showLoad && (
-                      <div style={{ marginTop: '20px', marginBottom: '20px' }}>
-                        <ProgressBar now={loadingProgress} label={`${loadingProgress}%`} />
-                      </div>
-                    )}
                   </dl>
                 </form>
               </dl>

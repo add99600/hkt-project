@@ -1,4 +1,4 @@
-body {
+   body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-size: .875rem;
@@ -9,9 +9,15 @@ body {
     background-color: #f9f9fa
 }
 
+   .col-12 {
+      width: 100%;
+   }
+   .row {
+      max-width: none; /* 또는 원하는 최대 너비 값을 설정 */
+   }
 
 #page-content{
-    padding-left: 150px;
+
     margin-top:100px;
 }
 
@@ -42,10 +48,16 @@ a:not([href]):not([tabindex]):focus {
     outline: 0
 }
 
+
+
+
+
+
 /*Mark Down*/
 
 
 @media (min-width:576px) {
+
     .col-sm {
         flex-basis: 0;
         flex-grow: 1;
@@ -259,7 +271,7 @@ a:not([href]):not([tabindex]):focus {
 
 @media (min-width:992px) {
     .page-container {
-        max-width: 1140px;
+        max-width: 800px;
         margin: 0 auto
     }
     .page-sidenav {
@@ -283,7 +295,23 @@ a:not([href]):not([tabindex]):focus {
     word-wrap: break-word
 }
 
+.list-item img {
+    width: 100px; /* Adjust the width as needed */
+    height: 100px; /* Adjust the height as needed */
+  }
 
+.larger-item {
+    height: 120px; /* Adjust the height as needed */
+  }
+
+/* community.css */
+.list-item .item-author {
+    font-size: 20px; /* Adjust the font size as needed */
+  }
+  
+  .list-item .item-except {
+    font-size: 15px; /* Adjust the font size as needed */
+  }
 
 
 
@@ -347,4 +375,3 @@ a:link{
 
    text-decoration: none;
 }
-

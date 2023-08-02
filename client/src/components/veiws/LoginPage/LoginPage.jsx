@@ -39,7 +39,7 @@ const LoginPage = () => {
       password: Password,
     };
   
-    axios.post('http://localhost:5000/api/users/login', body, { withCredentials: true })
+    axios.post('../api/users/login', body, { withCredentials: true })
       .then((response) => {
         if (response.data.loginSuccess) {
           console.log('로그인 성공!');
