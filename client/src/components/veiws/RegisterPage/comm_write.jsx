@@ -1,14 +1,18 @@
-import { useState} from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import '../assets/comm_write.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 const CommWrite = () => {
 
   const [Title, setTitle] = useState('');
   const [Content, setContent] = useState('');
   const [selectedImages, setSelectedImages] = useState([]);
+
+  const navigate = useNavigate();
 
   const onTitleHandler = (event) => {
     setTitle(event.target.value);
@@ -26,6 +30,11 @@ const CommWrite = () => {
   const onSubmitHandler = (event) => {
     event.preventDefault();
 
+    if (selectedImages.length === 0) {
+      alert('사진을 선택해주세요.');
+      return;
+    }
+
     const formData = new FormData();
     formData.append('title', Title);
     formData.append('content', Content);
@@ -34,11 +43,12 @@ const CommWrite = () => {
       formData.append('profile', image);
     });
 
-    axios.post('http://localhost:5000/api/community/posts', formData, {withCredentials: true})
+    axios.post('../api/community/posts', formData, { withCredentials: true })
       .then((response) => {
         console.log(response.data);
         if (response.data.success) {
           console.log('글 등록 성공!');
+          navigate('/comm');
         } else {
           alert('글 등록에 실패했습니다.');
         }
@@ -47,7 +57,6 @@ const CommWrite = () => {
         console.error('서버 요청 실패:', error);
       });
   };
-
   return (
     <div className="container marketing" style={{ paddingTop: '50px' }}>
       <div className="row featurette" style={{ height: '1000px' }}>
@@ -117,9 +126,11 @@ const CommWrite = () => {
                 <Button type="submit" variant="primary" style={{ width: '100px', height: '40px', margin: '5px', fontSize: '1.2rem' }}>
                   작성
                 </Button>
+                <Link to="/Comm">
                 <Button variant="danger" style={{ width: '100px', height: '40px', margin: '5px', fontSize: '1.2rem' }}>
                   취소
                 </Button>
+                </Link>
                 </div>
               </form>
             </div>

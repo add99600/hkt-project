@@ -16,7 +16,7 @@ app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 //application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/image',express.static('image'))
+app.use('/uploads',express.static('../uploads'))
 
 //application/jason
 app.use(bodyParser.json());
@@ -108,13 +108,13 @@ app.get("/api/users/logout", auth, (req, res) => {
   //  callback(null, true)
   //},
   //limits:{ // 파일 사이즈 제한
-  //  fileSize: 1024 * 1024 
+  //  fileSize: 1024 * 1024
   //}
 
   // 이미지 저장 위치
   var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, '../public/image');
+      cb(null, '../uploads/');
     },
     filename: function (req, file, cb) {
       cb(null, `${Date.now()}_${file.originalname}`);

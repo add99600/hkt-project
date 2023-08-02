@@ -44,7 +44,7 @@ const Home = () => {
             <h2>환영한다 <span></span>탈모친구들</h2>
             <p>탈모친구들 머리 자라난 모습 보고싶나</p>
             <div className="d-flex justify-content-center justify-content-lg-start">
-            <Link to="/mul" className="btn-get-started" style={{ color: 'white', textDecoration: 'none' }}>끝없는 탈모 레츠고</Link>
+            <Link to="/mul" className="btn-get-started" style={{ color: 'white', textDecoration: 'none' }}>시뮬레이션 하러 가기</Link>
           </div>
           </div>
           <div className="col-lg-6 order-1 order-lg-2">
