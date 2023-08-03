@@ -16,7 +16,7 @@ app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 //application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/image',express.static('image'))
+app.use('/uploads',express.static('../uploads'))
 
 //application/jason
 app.use(bodyParser.json());
@@ -108,13 +108,13 @@ app.get("/api/users/logout", auth, (req, res) => {
   //  callback(null, true)
   //},
   //limits:{ // 파일 사이즈 제한
-  //  fileSize: 1024 * 1024 
+  //  fileSize: 1024 * 1024
   //}
 
   // 이미지 저장 위치
   var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, '../public/image');
+      cb(null, '../uploads/');
     },
     filename: function (req, file, cb) {
       cb(null, `${Date.now()}_${file.originalname}`);
@@ -213,12 +213,12 @@ app.get("/api/community/posts/:postId", auth, async (req, res) => {
     }
 
     // 작성자와 로그인한 사용자가 다른 경우, 권한 없음 반환
-    if (req.user && post.author.toString() !== req.user._id.toString()) {
-      return res.status(403).json({
-        success: false,
-        message: "해당 포스트를 볼 권한이 없습니다.",
-      });
-    }
+    // if (req.user && post.author.toString() !== req.user._id.toString()) {
+    //   return res.status(403).json({
+    //     success: false,
+    //     message: "해당 포스트를 볼 권한이 없습니다.",
+    //   });
+    // }
 
     // 작성자 본인인 경우 content 필드를 포함하여 노출
     return res.status(200).json({

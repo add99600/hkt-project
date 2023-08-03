@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter, Link, Routes, Route } from 'react-router-dom';
+
 import Mul from '../RegisterPage/mul.jsx';
 import LoginPage from '../LoginPage/LoginPage.jsx';
 import Signup from '../LoginPage/Signup.jsx'
@@ -12,6 +13,8 @@ import Result from '../RegisterPage/result.jsx';
 import Infor from '../RegisterPage/infor.jsx';
 import LandingPage from './LandingPage.jsx';
 import CommView from '../RegisterPage/comm_view.jsx';
+
+
 
 function App() {
   return (
@@ -36,6 +39,13 @@ function App() {
 }
 
 const Home = () => {
+  //const cookies = new Cookies();
+  //const isLoggedIn = !!cookies.get('x_auth');
+
+  //useEffect(() => {
+  //  document.title = isLoggedIn ? '로그아웃' : '로그인';
+  //}, [isLoggedIn]);
+
   return (
     <section id="hero" className="hero" style={{ paddingTop: '200px' }}>
       <div className="container position-relative">
@@ -44,7 +54,7 @@ const Home = () => {
             <h2>환영한다 <span></span>탈모친구들</h2>
             <p>탈모친구들 머리 자라난 모습 보고싶나</p>
             <div className="d-flex justify-content-center justify-content-lg-start">
-            <Link to="/mul" className="btn-get-started" style={{ color: 'white', textDecoration: 'none' }}>끝없는 탈모 레츠고</Link>
+            <Link to="/mul" className="btn-get-started" style={{ color: 'white', textDecoration: 'none' }}>시뮬레이션 하러 가기</Link>
           </div>
           </div>
           <div className="col-lg-6 order-1 order-lg-2">
@@ -58,28 +68,28 @@ const Home = () => {
           <div className="row gy-4 mt-5">
             <div className="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
               <div className="icon-box">
-                <div className="icon"><i className="bi bi-easel"></i></div>
+                <div className="icon"><i className="bi bi-person-circle"></i></div>
                 <h4 className="title"><Link to="/Signup">회원가입</Link></h4>
               </div>
             </div>
 
             <div className="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
               <div className="icon-box">
-                <div className="icon"><i className="bi bi-geo-alt"></i></div>
-                <h4 className="title"><Link to="/login">로긴</Link></h4>
+                <div className="icon"><i className="bi bi-person-fill-check"></i></div>
+                <h4 className="title"><Link to="/login">로그인</Link></h4>
               </div>
             </div>
 
             <div className="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
               <div className="icon-box">
-                <div className="icon"><i className="bi bi-gem"></i></div>
+                <div className="icon"><i className="bi bi-chat-right-dots-fill"></i></div>
                 <h4 className="title"><Link to="/Comm">커뮤니티</Link></h4>
               </div>
             </div>
 
             <div className="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="500">
               <div className="icon-box">
-                <div className="icon"><i className="bi bi-command"></i></div>
+                <div className="icon"><i className="bi bi-question-circle"></i></div>
                 <h4 className="title"><Link to="/Infor">개발자 정보</Link></h4>
               </div>
             </div>

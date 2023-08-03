@@ -10,7 +10,7 @@ const postData = async () => {
         _id:token
     };
 
-    const response = await axios.post('/api/users/auth', data);
+    const response = await axios.post('../api/users/auth', data);
 
     console.log(response.data);
 
