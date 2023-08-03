@@ -28,7 +28,7 @@ const NavBar = () => {
       <div className="container-fluid container-xl d-flex align-items-center justify-content-between">
         <Link to="/" className="logo d-flex align-items-center">
           <img src="assets/img/logo.png" alt="" />
-          <h1>베트남사스케</h1>
+          <h1>모발인</h1>
         </Link>
         <nav id="navbar" className="navbar">
           <ul>
@@ -46,8 +46,7 @@ const NavBar = () => {
             )}
           </ul>
         </nav>
-        <i className="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
-        <i className="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+
       </div>
     </header>
   );

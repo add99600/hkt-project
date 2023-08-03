@@ -14,8 +14,8 @@ const Result = () => {
   const handleDownload = async () => {
     const canvas = await html2canvas(document.getElementById('capture_area'));
     var el = document.createElement('a');
-    el.href = canvas.toDataURL('image/jpeg');
-    el.download = '결과이미지.PNG';
+    el.href = canvas.toDataURL('image/jpg');
+    el.download = '결과이미지.jpg'; //PNG
     el.click();
   };
 
@@ -79,3 +79,4 @@ const Result = () => {
 };
 
 export default Result;
+ 
