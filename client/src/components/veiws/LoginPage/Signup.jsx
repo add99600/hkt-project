@@ -44,7 +44,7 @@ function Signup() {
                 if (response.data.success) {
                     console.log('회원가입 성공!');
                 } else {
-                    alert('회원가입에 실패했습니다.');
+                    alert('동일한 이메일이 있습니다.');
                 }
             })
             .catch((error) => {

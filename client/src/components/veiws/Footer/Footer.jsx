@@ -19,23 +19,21 @@ const Footer = () => {
             근에 알았는데 미안하다..</p>
         </div>
         <div className="col-lg-2 col-6 footer-links">
-          <h4>Useful Links</h4>
+          <h4></h4>
           <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Terms of service</a></li>
-            <li><a href="#">Privacy policy</a></li>
+            <li><a ></a></li>
+            <li><a ></a></li>
+            <li><a ></a></li>
+            <li><a ></a></li>
+            <li><a ></a></li>
           </ul>
         </div>
         <div className="col-lg-2 col-6 footer-links">
-          <h4>Our Services</h4>
+          <h4>우리가 하는 서비스</h4>
           <ul>
-            <li><a href="#">Web Design</a></li>
-            <li><a href="#">Web Development</a></li>
-            <li><a href="#">Product Management</a></li>
-            <li><a href="#">Marketing</a></li>
-            <li><a href="#">Graphic Design</a></li>
+            <li><a >시뮬레이션</a></li>
+            <li><a >탈모측정</a></li>
+            <li><a >커뮤니티</a></li>
           </ul>
         </div>
         <div className="col-lg-3 col-md-12 footer-contact text-center text-md-start">
@@ -59,7 +57,7 @@ const Footer = () => {
         {/* You can delete the links only if you purchased the pro version. */}
         {/* Licensing information: https://bootstrapmade.com/license/ */}
         {/* Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/impact-bootstrap-business-website-template/ */}
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        Designed by <a >BootstrapMade</a>
       </div>
     </div>
   </footer>

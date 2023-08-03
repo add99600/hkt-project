@@ -43,7 +43,11 @@ const CommWrite = () => {
       formData.append('profile', image);
     });
 
+<<<<<<< HEAD
     axios.post('../api/community/posts', formData, { withCredentials: true })
+=======
+    axios.post('/api/community/posts', formData, { withCredentials: true })
+>>>>>>> 4f28d1f84ddab5ba13087d39b6ab5bdd8ae43373
       .then((response) => {
         console.log(response.data);
         if (response.data.success) {

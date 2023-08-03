@@ -14,7 +14,7 @@ const CommView = () => {
   useEffect(() => {
     axios({
       method: 'GET',
-      url: `http://localhost:5000/api/community/posts/${id}`,
+      url: `/api/community/posts/${id}`,
       withCredentials: true,
     })
       .then(response => {
