@@ -1,11 +1,7 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
-<<<<<<< HEAD
-import { Link, useNavigate } from 'react-router-dom';
-=======
 import { Link } from 'react-router-dom';
 import html2canvas from 'html2canvas';
->>>>>>> 4f28d1f84ddab5ba13087d39b6ab5bdd8ae43373
 
 const Mul = () => {
   const imageStyle = {
@@ -15,14 +11,10 @@ const Mul = () => {
   };
 
   const [imageFile, setImageFile] = useState(null);
-<<<<<<< HEAD
-  const [showLoad, setShowLoad] = useState(false); // 추가한 state 변수
-=======
   const [state, setState] = useState(null);
   const [previousImageUrl, setPreviousImageUrl] = useState(null);
   const [showResults, setShowResults] = useState(false); // 결과창 숨김
 
->>>>>>> 4f28d1f84ddab5ba13087d39b6ab5bdd8ae43373
 
   const previewImage = (event) => {
     const file = event.target.files[0];
@@ -35,22 +27,6 @@ const Mul = () => {
 
   const handleExecute = () => {
     if (imageFile) {
-<<<<<<< HEAD
-      setShowLoad(true); // setShowLoad 사용
-
-      const formData = new FormData();
-      formData.append('image', imageFile);
-
-      fetch('/help', {
-        method: 'POST',
-        body: formData,
-        withCredentials: true
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          document.getElementById("ItemPreview").src = 'data:image/png;base64,' + data;
-=======
       const formData = new FormData();
       formData.append('image', imageFile);
   
@@ -68,15 +44,10 @@ const Mul = () => {
           const imageUrl = URL.createObjectURL(data);
           setState(imageUrl);
           setShowResults(true); 
->>>>>>> 4f28d1f84ddab5ba13087d39b6ab5bdd8ae43373
         })
         .catch((error) => {
           console.error(error);
         });
-<<<<<<< HEAD
-
-=======
->>>>>>> 4f28d1f84ddab5ba13087d39b6ab5bdd8ae43373
     } else {
       alert('사진을 입력해주세요');
     }
@@ -129,46 +100,6 @@ const Mul = () => {
             </dl>
           </div>
         </div>
-<<<<<<< HEAD
-        <div className="board_write_wrap">
-          <div>
-            <div>
-              <dl>
-                <form>
-                  <dt style={{ color: '#fff', fontSize: '1.4rem' }}>사진 선택</dt>
-                  <dd>
-                    <input
-                      className="form-control"
-                      style={{ fontSize: '1.4rem' }}
-                      type="file"
-                      id="image"
-                      onChange={previewImage}
-                    />
-                  </dd>
-                  <br />
-                  <dl style={{ paddingTop: '10px', marginBottom: 0 }}>
-                    {imageFile ? (
-                      <img
-                        style={{ maxWidth: '600px', maxHeight: '600px' }}
-                        id="ItemPreview"
-                      />
-                    ) : null}
-                  </dl>
-                </form>
-              </dl>
-            </div>
-          </div>
-          <div>
-            <Button variant="primary" size="lg" style={{ marginRight: '10px' }} onClick={handleExecute}>
-                실행하기
-            </Button>
-            <Button variant="primary" size="lg">
-              <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
-                취소
-              </Link>
-            </Button>
-          </div>
-=======
         <div>
           <Button variant="primary" size="lg" style={{ marginRight: '10px' }} onClick={handleExecute}>
             실행하기
@@ -178,7 +109,6 @@ const Mul = () => {
               취소
             </Link>
           </Button>
->>>>>>> 4f28d1f84ddab5ba13087d39b6ab5bdd8ae43373
         </div>
       </div>
 
