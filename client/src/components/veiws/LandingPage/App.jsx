@@ -51,8 +51,9 @@ const Home = () => {
       <div className="container position-relative">
         <div className="row gy-5" data-aos="fade-in">
           <div className="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start">
-            <h2>환영한다 <span></span>탈모친구들</h2>
-            <p>탈모친구들 머리 자라난 모습 보고싶나</p>
+          <h2>환영합니다<span></span></h2>
+            <p style={{ fontSize: '1.2em' }}>모발이식 후 사진이 보고싶다면 아래 버튼을 눌러주세요</p>
+            <span style={{ fontSize: '24px' }}>👇👇👇👇👇👇👇👇</span>
             <div className="d-flex justify-content-center justify-content-lg-start">
             <Link to="/mul" className="btn-get-started" style={{ color: 'white', textDecoration: 'none' }}>시뮬레이션 하러 가기</Link>
           </div>

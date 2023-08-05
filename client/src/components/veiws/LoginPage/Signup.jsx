@@ -38,7 +38,7 @@ function Signup() {
             name: Name
         };
 
-        axios.post('../api/users/register', body)
+        axios.post('/api/users/register', body)
             .then((response) => {
                 console.log(response.data); 
                 if (response.data.success) {

@@ -4,7 +4,7 @@ import axios from 'axios';
 const LandingPage = () => {
   useEffect(() => {
     try {
-      axios.get('../api/hello')
+      axios.get('/api/hello')
         .then(response => console.log(response.data))
         .catch(error => {
           // Handle error here

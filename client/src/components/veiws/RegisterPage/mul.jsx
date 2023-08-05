@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
+
 import { Link } from 'react-router-dom';
 import html2canvas from 'html2canvas';
+
 
 const Mul = () => {
   const imageStyle = {
@@ -11,9 +13,11 @@ const Mul = () => {
   };
 
   const [imageFile, setImageFile] = useState(null);
+
   const [state, setState] = useState(null);
   const [previousImageUrl, setPreviousImageUrl] = useState(null);
   const [showResults, setShowResults] = useState(false); // 결과창 숨김
+
 
 
   const previewImage = (event) => {
