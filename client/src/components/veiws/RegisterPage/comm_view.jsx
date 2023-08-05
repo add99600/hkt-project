@@ -34,7 +34,7 @@ const CommView = () => {
   }
 
   const handleDelete = () => {
-    axios.delete(`../api/community/posts/${id}`, { withCredentials: true })
+    axios.delete(`/api/community/posts/${id}`, { withCredentials: true })
       .then(response => {
         console.log(response.data);
 

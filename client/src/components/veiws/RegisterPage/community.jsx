@@ -20,7 +20,7 @@ const Comm = () => {
   const fetchPosts = () => {
     axios({
       method: 'GET',
-      url: '../api/community/posts'
+      url: '/api/community/posts'
     }).then(response => {
       console.log(response.data);
       const reversedPosts = response.data.posts.reverse();
@@ -57,7 +57,7 @@ const Comm = () => {
                 <div key={post._id} className="list-item larger-item" data-id={post._id}>
                   {post.images && post.images.length > 0 && (
                     <div>
-                      <img src={'http://localhost:5000/'+post.images[0]} className="avatar" />
+                      <img src={'http://13.125.224.77/'+post.images[0]} className="avatar" />
                     </div>
                   )}
                   <div className="flex">
