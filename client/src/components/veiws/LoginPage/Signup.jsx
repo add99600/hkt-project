@@ -43,6 +43,7 @@ function Signup() {
                 console.log(response.data); 
                 if (response.data.success) {
                     console.log('회원가입 성공!');
+                    alert("register success");
                 } else {
                     alert('동일한 이메일이 있습니다.');
                 }

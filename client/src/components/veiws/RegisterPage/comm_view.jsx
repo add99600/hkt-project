@@ -25,7 +25,7 @@ const CommView = () => {
       .catch(error => {
         console.error('서버 요청 실패:', error);
         alert('불러오기에 실패했습니다.');
-        setLoading(false);
+        window.location.href = "/login"
       });
   }, [id]);
 
@@ -97,7 +97,7 @@ const CommView = () => {
                       <img
                         className="detail-pic"
                         style={imageStyle}
-                        src={'http://localhost:5000/'+post.images[0]}
+                        src={'http://talmo.sadbald.kro.kr/'+post.images[0]}
                         alt="Post Image"
                       />
                     ) : (

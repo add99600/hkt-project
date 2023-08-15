@@ -50,7 +50,7 @@ const CommWrite = () => {
           console.log('글 등록 성공!');
           navigate('/comm');
         } else {
-          alert('글 등록에 실패했습니다.');
+          alert('글 등록에 실패했습니다. 로그인을 해주세요');
         }
       })
       .catch((error) => {

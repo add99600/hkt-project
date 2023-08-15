@@ -8,15 +8,17 @@ const { auth } = require("./middleware/auth");
 const { User } = require("./models/User");
 const { CommunityPost } = require("./models/CommunityPost");
 const multer = require("multer");
-const cors = require('cors')
+const cors = require('cors');
+const path = require('path');
 
-
-app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
+app.use(cors())
+//app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 
 //application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/uploads',express.static('../uploads'))
+app.use('/uploads',express.static('uploads'))
+//app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 //application/jason
 app.use(bodyParser.json());

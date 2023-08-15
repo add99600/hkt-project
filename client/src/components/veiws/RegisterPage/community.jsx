@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import  Card  from 'react-bootstrap/Card';
 import '../assets/community.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
@@ -42,11 +43,13 @@ const Comm = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage => currentPage - 1);
     }
+    
   };
 
   const totalPages = Math.ceil(totalDataItems / pageSize);
 
   return (
+    
     <div className="page-content page-container" id="page-content">
       <div className="padding">
         <div className="row">
@@ -55,11 +58,6 @@ const Comm = () => {
             <div className="list list-row block" >
               {posts.map(post => (
                 <div key={post._id} className="list-item larger-item" data-id={post._id}>
-                  {post.images && post.images.length > 0 && (
-                    <div>
-                      <img src={'http://13.125.224.77/'+post.images[0]} className="avatar" />
-                    </div>
-                  )}
                   <div className="flex">
                     <Link to={`/CommView/${post._id}`} className="item-author text-color" data-abc="true">{post.title}</Link>
                     <div className="item-except text-muted text-sm h-1x">
