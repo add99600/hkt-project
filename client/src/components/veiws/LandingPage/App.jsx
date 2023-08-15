@@ -14,7 +14,8 @@ import Infor from '../RegisterPage/infor.jsx';
 import LandingPage from './LandingPage.jsx';
 import CommView from '../RegisterPage/comm_view.jsx';
 
-
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 function App() {
   return (
@@ -34,17 +35,29 @@ function App() {
         <Route path="/CommView/:id" element={<CommView />} />
       </Routes>
     </BrowserRouter>
-
   );
+  
 }
 
 const Home = () => {
-  //const cookies = new Cookies();
-  //const isLoggedIn = !!cookies.get('x_auth');
+  const token = Cookies.get('x_auth');
 
-  //useEffect(() => {
-  //  document.title = isLoggedIn ? '로그아웃' : '로그인';
-  //}, [isLoggedIn]);
+  const handleLogout = () => {
+    axios.get('/api/users/logout', { withCredentials: true })
+      .then(response => {
+        if (response.data.success) {
+          console.log('로그아웃 성공!');
+          Cookies.remove('x_auth'); // 쿠키에서 토큰 삭제
+          alert('로그아웃');
+          window.location.reload(); // 로그인 성공 시 페이지 새로고침
+        } else {
+          alert('로그아웃에 실패했습니다.');
+        }
+      })
+      .catch(error => {
+        console.error('서버 요청 실패:', error);
+      });
+  };
 
   return (
     <section id="hero" className="hero" style={{ paddingTop: '200px' }}>
@@ -77,7 +90,13 @@ const Home = () => {
             <div className="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
               <div className="icon-box">
                 <div className="icon"><i className="bi bi-person-fill-check"></i></div>
-                <h4 className="title"><Link to="/login">로그인</Link></h4>
+                {token ? (
+                  // 로그인한 상태라면 로그아웃 링크를 보여줍니다.
+                  <h4 className="title" onClick={handleLogout} style={{color: 'white'}}>로그아웃</h4>
+                ) : (
+                  // 로그인하지 않은 상태라면 로그인 링크를 보여줍니다.
+                  <h4 className="title"><Link to="/login">로그인</Link></h4>
+                )}
               </div>
             </div>
 

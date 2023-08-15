@@ -2,6 +2,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
+
 const NavBar = () => {
 
   const token = Cookies.get('x_auth');
